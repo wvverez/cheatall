@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CheatAll — Buscador de comandos y rutas de Linux</title>
+<meta name="description" content="Busca al instante comandos de SSH, FTP, SFTP, SCP, Ubuntu Server y Windows, y rutas de configuración.">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@400;600&family=Cookie&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="./"><img src="logo.png" alt="Logo" width="36" height="36"><span>CheatAll</span></a>
+  <nav class="actions">
+    <button id="theme" class="theme" type="button" aria-label="Cambiar entre modo claro y oscuro" title="Cambiar tema">
+      <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+        <g class="sun"><g class="rays" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 1.5v2.5M12 20v2.5M1.5 12H4M20 12h2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></g><circle cx="12" cy="12" r="4.6" fill="currentColor"/></g>
+        <path class="moon" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="#ddd6fe"/>
+        <g class="stars" fill="#ddd6fe"><circle cx="19" cy="4.5" r="1"/><circle cx="21.8" cy="8" r=".7"/></g>
+      </svg>
+    </button>
+    <a id="gh" class="pill" href="https://github.com/wvverez" target="_blank" rel="noopener" aria-label="Repositorio en GitHub">
+      <svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      <span class="repo">GitHub</span>
+      <span class="stars"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><b id="stars">Star</b></span>
+    </a>
+    <a class="bmc" href="https://buymeacoffee.com/wvverez" target="_blank" rel="noopener" aria-label="Buy me a coffee">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#0d0c22" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <g class="steam"><path d="M9 5c-1-1 1-2 0-3.2M14 5c-1-1 1-2 0-3.2"/></g>
+        <path d="M4.5 8.2h14l-1.3 10.6a2.4 2.4 0 0 1-2.4 2.1H8.2a2.4 2.4 0 0 1-2.4-2.1L4.5 8.2z" fill="#fff"/>
+        <path d="M18.2 10.5h.9a2.6 2.6 0 0 1 0 5.2h-1.3"/>
+        <rect x="3.5" y="6.3" width="16" height="2.4" rx="1.2" fill="#0d0c22"/>
+        <path d="M11.5 18.4c-1.5-1-1.9-1.8-1.9-2.4a1 1 0 0 1 1.9-.4 1 1 0 0 1 1.9.4c0 .6-.4 1.4-1.9 2.4z" fill="#ff4d6d" stroke="none"/>
+      </svg>
+      <span>Buy me a coffee</span>
+    </a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <img class="hero-logo" src="logo.png" alt="Logo de CheatAll" width="96" height="96">
+    <h1>Encuentra el comando o la ruta que necesites</h1>
+    <p class="conn-hint">Escribe tu usuario, IP y puerto y los comandos se adaptan solos.</p>
+    <div class="conn" role="group" aria-label="Datos de conexión">
+      <label><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>Usuario<input id="f-user" placeholder="usuario" autocomplete="off" spellcheck="false"></span></label>
+      <label><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span>IP<input id="f-ip" placeholder="IP" autocomplete="off" spellcheck="false"></span></label>
+      <label><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/></svg><span>Puerto<input id="f-port" placeholder="puerto" inputmode="numeric" maxlength="5" autocomplete="off"></span></label>
+    </div>
+    <label class="search">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Prueba con «túnel», «-P 2222» o «subir carpeta»" autocomplete="off" autofocus>
+      <kbd>/</kbd>
+    </label>
+    <div class="chips" id="chips" role="tablist" aria-label="Filtrar por herramienta"></div>
+  </section>
+
+  <section class="results">
+    <p id="count" class="count" aria-live="polite"></p>
+    <div id="list"></div>
+  </section>
+  <section id="features" class="features">
+    <h2>Todo lo que tiene CheatAll</h2>
+    <div class="grid">
+      <article class="feat"><div class="ico"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></div><h3>Búsqueda instantánea</h3><p>Filtra mientras escribes, sin importar mayúsculas ni tildes, y resalta lo que coincide.</p></article>
+      <article class="feat"><div class="ico"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg></div><h3>Copia con un clic</h3><p>Cada comando se copia al portapapeles con un botón, listo para pegar en tu terminal.</p></article>
+      <article class="feat"><div class="ico"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 17 6-6-6-6"/><path d="M12 19h8"/></svg></div><h3><span id="total">0</span> comandos y rutas</h3><p>Organizados por herramienta y sección: conexión, claves, túneles, subidas, descargas y más.</p></article>
+      <article class="feat"><div class="ico"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg></div><h3>Filtros por herramienta</h3><p>Limita los resultados a una herramienta (SSH, FTP, Ubuntu, Windows, Rutas…) con un solo toque.</p></article>
+      <article class="feat"><div class="ico"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 9h.01M10 9h.01M14 9h.01M18 9h.01M7 15h10"/></svg></div><h3>Atajos de teclado</h3><p>Pulsa / para ir al buscador y Esc para limpiarlo, sin coger el ratón.</p></article>
+      <article class="feat"><div class="ico"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></div><h3>Modo claro y oscuro</h3><p>Cambia de tema con el botón de la cabecera, con iconos de sol y luna animados.</p></article>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Creado con <3 por @wvverez</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
